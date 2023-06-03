@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        #map {
+            width: 1280px;
+            height: 866px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="data/barrios_0.js"></script>
+        <script src="data/comunas_1.js"></script>
+        <script src="data/rios_2.js"></script>
+        <script src="data/manzanas_3.js"></script>
+        <script src="data/nomenclatura_ejes_viales_4.js"></script>
+        <script src="data/sitios_interes_5.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[3.327440373183315,-76.66157171072035],[3.5102232431025655,-76.39251929255815]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_barrios_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID_BARRIO'] !== null ? autolinker.link(feature.properties['ID_BARRIO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BARRIO'] !== null ? autolinker.link(feature.properties['BARRIO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COMUNA'] !== null ? autolinker.link(feature.properties['COMUNA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESTRA_MODA'] !== null ? autolinker.link(feature.properties['ESTRA_MODA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA'] !== null ? autolinker.link(feature.properties['AREA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PERIMETRO'] !== null ? autolinker.link(feature.properties['PERIMETRO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_barrios_0_0() {
+            return {
+                pane: 'pane_barrios_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,155,111,0.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_barrios_0');
+        map.getPane('pane_barrios_0').style.zIndex = 400;
+        map.getPane('pane_barrios_0').style['mix-blend-mode'] = 'normal';
+        var layer_barrios_0 = new L.geoJson(json_barrios_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_barrios_0',
+            layerName: 'layer_barrios_0',
+            pane: 'pane_barrios_0',
+            onEachFeature: pop_barrios_0,
+            style: style_barrios_0_0,
+        });
+        bounds_group.addLayer(layer_barrios_0);
+        map.addLayer(layer_barrios_0);
+        function pop_comunas_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">COMUNA</th>\
+                        <td>' + (feature.properties['COMUNA'] !== null ? autolinker.link(feature.properties['COMUNA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOMBRE'] !== null ? autolinker.link(feature.properties['NOMBRE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA'] !== null ? autolinker.link(feature.properties['AREA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PERIMETRO'] !== null ? autolinker.link(feature.properties['PERIMETRO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_comunas_1_0() {
+            return {
+                pane: 'pane_comunas_1',
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_comunas_1');
+        map.getPane('pane_comunas_1').style.zIndex = 401;
+        map.getPane('pane_comunas_1').style['mix-blend-mode'] = 'normal';
+        var layer_comunas_1 = new L.geoJson(json_comunas_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_comunas_1',
+            layerName: 'layer_comunas_1',
+            pane: 'pane_comunas_1',
+            onEachFeature: pop_comunas_1,
+            style: style_comunas_1_0,
+        });
+        bounds_group.addLayer(layer_comunas_1);
+        map.addLayer(layer_comunas_1);
+        function pop_rios_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOMBRE'] !== null ? autolinker.link(feature.properties['NOMBRE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA'] !== null ? autolinker.link(feature.properties['AREA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PERIMETRO'] !== null ? autolinker.link(feature.properties['PERIMETRO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_rios_2_0() {
+            return {
+                pane: 'pane_rios_2',
+                opacity: 1,
+                color: 'rgba(31,120,180,0.98)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 4.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(31,120,180,0.6494901960784314)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_rios_2');
+        map.getPane('pane_rios_2').style.zIndex = 402;
+        map.getPane('pane_rios_2').style['mix-blend-mode'] = 'normal';
+        var layer_rios_2 = new L.geoJson(json_rios_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_rios_2',
+            layerName: 'layer_rios_2',
+            pane: 'pane_rios_2',
+            onEachFeature: pop_rios_2,
+            style: style_rios_2_0,
+        });
+        bounds_group.addLayer(layer_rios_2);
+        map.addLayer(layer_rios_2);
+        function pop_manzanas_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CODIGO'] !== null ? autolinker.link(feature.properties['CODIGO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESTRATO'] !== null ? autolinker.link(feature.properties['ESTRATO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FECHA'] !== null ? autolinker.link(feature.properties['FECHA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBSERVACIO'] !== null ? autolinker.link(feature.properties['OBSERVACIO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_manzanas_3_0() {
+            return {
+                pane: 'pane_manzanas_3',
+                opacity: 1,
+                color: 'rgba(166,166,166,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(214,214,214,0.5686274509803921)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_manzanas_3');
+        map.getPane('pane_manzanas_3').style.zIndex = 403;
+        map.getPane('pane_manzanas_3').style['mix-blend-mode'] = 'normal';
+        var layer_manzanas_3 = new L.geoJson(json_manzanas_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_manzanas_3',
+            layerName: 'layer_manzanas_3',
+            pane: 'pane_manzanas_3',
+            onEachFeature: pop_manzanas_3,
+            style: style_manzanas_3_0,
+        });
+        bounds_group.addLayer(layer_manzanas_3);
+        map.addLayer(layer_manzanas_3);
+        function pop_nomenclatura_ejes_viales_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ONEWAY'] !== null ? autolinker.link(feature.properties['ONEWAY'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FT_MINUTES'] !== null ? autolinker.link(feature.properties['FT_MINUTES'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TF_MINUTES'] !== null ? autolinker.link(feature.properties['TF_MINUTES'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['HIERARCHY'] !== null ? autolinker.link(feature.properties['HIERARCHY'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['VELOCIDAD'] !== null ? autolinker.link(feature.properties['VELOCIDAD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['METERS'] !== null ? autolinker.link(feature.properties['METERS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID_VIA'] !== null ? autolinker.link(feature.properties['ID_VIA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MUNICIPIO'] !== null ? autolinker.link(feature.properties['MUNICIPIO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COMUNA'] !== null ? autolinker.link(feature.properties['COMUNA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID_BARRIO'] !== null ? autolinker.link(feature.properties['ID_BARRIO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BARRIO'] !== null ? autolinker.link(feature.properties['BARRIO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_OLD'] !== null ? autolinker.link(feature.properties['NOM_OLD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_ACTUAL'] !== null ? autolinker.link(feature.properties['NOM_ACTUAL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TIPO'] !== null ? autolinker.link(feature.properties['TIPO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NUMERO'] !== null ? autolinker.link(feature.properties['NUMERO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOMBRE'] !== null ? autolinker.link(feature.properties['NOMBRE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_ALTERN'] !== null ? autolinker.link(feature.properties['NOM_ALTERN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CLASE_ID'] !== null ? autolinker.link(feature.properties['CLASE_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_NUEVA'] !== null ? autolinker.link(feature.properties['NOM_NUEVA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SECTOR_PN'] !== null ? autolinker.link(feature.properties['SECTOR_PN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CAMBIA'] !== null ? autolinker.link(feature.properties['CAMBIA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['EJECU_PN'] !== null ? autolinker.link(feature.properties['EJECU_PN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['RESOLUCION'] !== null ? autolinker.link(feature.properties['RESOLUCION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBSERVAC'] !== null ? autolinker.link(feature.properties['OBSERVAC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ACUERDO'] !== null ? autolinker.link(feature.properties['ACUERDO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DATE'] !== null ? autolinker.link(feature.properties['DATE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TIPO_CAMBI'] !== null ? autolinker.link(feature.properties['TIPO_CAMBI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_nomenclatura_ejes_viales_4_0() {
+            return {
+                pane: 'pane_nomenclatura_ejes_viales_4',
+                opacity: 1,
+                color: 'rgba(235,121,21,0.3843137254901961)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_nomenclatura_ejes_viales_4');
+        map.getPane('pane_nomenclatura_ejes_viales_4').style.zIndex = 404;
+        map.getPane('pane_nomenclatura_ejes_viales_4').style['mix-blend-mode'] = 'normal';
+        var layer_nomenclatura_ejes_viales_4 = new L.geoJson(json_nomenclatura_ejes_viales_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_nomenclatura_ejes_viales_4',
+            layerName: 'layer_nomenclatura_ejes_viales_4',
+            pane: 'pane_nomenclatura_ejes_viales_4',
+            onEachFeature: pop_nomenclatura_ejes_viales_4,
+            style: style_nomenclatura_ejes_viales_4_0,
+        });
+        bounds_group.addLayer(layer_nomenclatura_ejes_viales_4);
+        map.addLayer(layer_nomenclatura_ejes_viales_4);
+        function pop_sitios_interes_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID_SI'] !== null ? autolinker.link(feature.properties['ID_SI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOMBRE'] !== null ? autolinker.link(feature.properties['NOMBRE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['UBICACION'] !== null ? autolinker.link(feature.properties['UBICACION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID_TIPO'] !== null ? autolinker.link(feature.properties['ID_TIPO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TIPO'] !== null ? autolinker.link(feature.properties['TIPO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID_BARRIO'] !== null ? autolinker.link(feature.properties['ID_BARRIO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BARRIO'] !== null ? autolinker.link(feature.properties['BARRIO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COMUNA'] !== null ? autolinker.link(feature.properties['COMUNA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['URL1'] !== null ? autolinker.link(feature.properties['URL1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['URL2'] !== null ? autolinker.link(feature.properties['URL2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['URL3'] !== null ? autolinker.link(feature.properties['URL3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['REGIELE'] !== null ? autolinker.link(feature.properties['REGIELE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Cuadricula'] !== null ? autolinker.link(feature.properties['Cuadricula'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_sitios_interes_5_0(feature) {
+            switch(String(feature.properties['TIPO'])) {
+                case 'ALMACEN':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(118,233,139,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'APARTAHOTEL':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,200,106,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'ARTE':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(198,90,222,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'BANCO':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(80,204,14,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'BIP':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(211,73,65,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CEMENTERIO':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(216,237,55,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CENTRO COMERCIAL':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(53,211,137,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CENTRO RELIGIOSO':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(37,218,164,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CLUB SOCIAL':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(83,113,212,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CONSULADO':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,87,147,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'DISCOTECA':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(203,150,115,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'DROGUERIA':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(206,199,58,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'ESCUELA AVIACION':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(60,215,25,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'ESTACION DE SERVICIO':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(126,238,165,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'FUNDACION':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,72,229,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'HACIENDA':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(104,87,227,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'HOSPEDAJE':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(163,201,73,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'HOSTAL':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,76,208,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'HOTEL':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(115,157,216,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'INSTITUCIONAL':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,16,81,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'JOYERIA':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(31,209,31,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'MIRADOR':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,93,56,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'MONUMENTO':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(222,155,60,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'NOTARIA':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(31,172,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'PARQUE':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(239,104,122,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'PARQUEADERO':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,114,213,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'RESTAURANTE':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(159,223,86,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SUPERMERCADO':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,31,162,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'TABERNA':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(63,225,206,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'TERMINAL DE TRANSPORTE':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,124,223,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'TIENDAS NATURISTAS':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(191,114,235,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'ZONA WIFI':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(29,229,240,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'ZOOLOGICO':
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(161,135,226,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_sitios_interes_5',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(46,161,237,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_sitios_interes_5');
+        map.getPane('pane_sitios_interes_5').style.zIndex = 405;
+        map.getPane('pane_sitios_interes_5').style['mix-blend-mode'] = 'normal';
+        var layer_sitios_interes_5 = new L.geoJson(json_sitios_interes_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_sitios_interes_5',
+            layerName: 'layer_sitios_interes_5',
+            pane: 'pane_sitios_interes_5',
+            onEachFeature: pop_sitios_interes_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_sitios_interes_5_0(feature));
+            },
+        });
+        var cluster_sitios_interes_5 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_sitios_interes_5.addLayer(layer_sitios_interes_5);
+
+        bounds_group.addLayer(layer_sitios_interes_5);
+        cluster_sitios_interes_5.addTo(map);
+        map.on("zoomend", function(e) {
+            if (map.getZoom() <= 19 && map.getZoom() >= 14) {
+                map.addLayer(layer_manzanas_3);
+            } else if (map.getZoom() > 19 || map.getZoom() < 14) {
+                map.removeLayer(layer_manzanas_3);
+            }
+            if (map.getZoom() <= 19 && map.getZoom() >= 15) {
+                map.addLayer(layer_nomenclatura_ejes_viales_4);
+            } else if (map.getZoom() > 19 || map.getZoom() < 15) {
+                map.removeLayer(layer_nomenclatura_ejes_viales_4);
+            }
+            if (map.getZoom() <= 19 && map.getZoom() >= 15) {
+                map.addLayer(cluster_sitios_interes_5);
+            } else if (map.getZoom() > 19 || map.getZoom() < 15) {
+                map.removeLayer(cluster_sitios_interes_5);
+            }
+        });
+            if (map.getZoom() <= 19 && map.getZoom() >= 14) {
+                map.addLayer(layer_manzanas_3);
+            } else if (map.getZoom() > 19 || map.getZoom() < 14) {
+                map.removeLayer(layer_manzanas_3);
+            }
+            if (map.getZoom() <= 19 && map.getZoom() >= 15) {
+                map.addLayer(layer_nomenclatura_ejes_viales_4);
+            } else if (map.getZoom() > 19 || map.getZoom() < 15) {
+                map.removeLayer(layer_nomenclatura_ejes_viales_4);
+            }
+            if (map.getZoom() <= 19 && map.getZoom() >= 15) {
+                map.addLayer(cluster_sitios_interes_5);
+            } else if (map.getZoom() > 19 || map.getZoom() < 15) {
+                map.removeLayer(cluster_sitios_interes_5);
+            }
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'sitios_interes<br /><table><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_ALMACEN0.png" /></td><td>ALMACEN</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_APARTAHOTEL1.png" /></td><td>APARTAHOTEL</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_ARTE2.png" /></td><td>ARTE</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_BANCO3.png" /></td><td>BANCO</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_BIP4.png" /></td><td>BIP</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_CEMENTERIO5.png" /></td><td>CEMENTERIO</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_CENTROCOMERCIAL6.png" /></td><td>CENTRO COMERCIAL</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_CENTRORELIGIOSO7.png" /></td><td>CENTRO RELIGIOSO</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_CLUBSOCIAL8.png" /></td><td>CLUB SOCIAL</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_CONSULADO9.png" /></td><td>CONSULADO</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_DISCOTECA10.png" /></td><td>DISCOTECA</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_DROGUERIA11.png" /></td><td>DROGUERIA</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_ESCUELAAVIACION12.png" /></td><td>ESCUELA AVIACION</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_ESTACIONDESERVICIO13.png" /></td><td>ESTACION DE SERVICIO</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_FUNDACION14.png" /></td><td>FUNDACION</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_HACIENDA15.png" /></td><td>HACIENDA</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_HOSPEDAJE16.png" /></td><td>HOSPEDAJE</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_HOSTAL17.png" /></td><td>HOSTAL</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_HOTEL18.png" /></td><td>HOTEL</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_INSTITUCIONAL19.png" /></td><td>INSTITUCIONAL</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_JOYERIA20.png" /></td><td>JOYERIA</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_MIRADOR21.png" /></td><td>MIRADOR</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_MONUMENTO22.png" /></td><td>MONUMENTO</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_NOTARIA23.png" /></td><td>NOTARIA</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_PARQUE24.png" /></td><td>PARQUE</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_PARQUEADERO25.png" /></td><td>PARQUEADERO</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_RESTAURANTE26.png" /></td><td>RESTAURANTE</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_SUPERMERCADO27.png" /></td><td>SUPERMERCADO</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_TABERNA28.png" /></td><td>TABERNA</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_TERMINALDETRANSPORTE29.png" /></td><td>TERMINAL DE TRANSPORTE</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_TIENDASNATURISTAS30.png" /></td><td>TIENDAS NATURISTAS</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_ZONAWIFI31.png" /></td><td>ZONA WIFI</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_ZOOLOGICO32.png" /></td><td>ZOOLOGICO</td></tr><tr><td style="text-align: center;"><img src="legend/sitios_interes_5_33.png" /></td><td></td></tr></table>': cluster_sitios_interes_5,'<img src="legend/nomenclatura_ejes_viales_4.png" /> nomenclatura_ejes_viales': layer_nomenclatura_ejes_viales_4,'<img src="legend/manzanas_3.png" /> manzanas': layer_manzanas_3,'<img src="legend/rios_2.png" /> rios': layer_rios_2,'<img src="legend/comunas_1.png" /> comunas': layer_comunas_1,'<img src="legend/barrios_0.png" /> barrios': layer_barrios_0,}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_comunas_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['COMUNA'] !== null?String('<div style="color: #323232; font-size: 7pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['COMUNA']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_comunas_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_comunas_1]);
+        map.on("zoomend", function(){
+            resetLabels([layer_comunas_1]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_comunas_1]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_comunas_1]);
+        });
+        </script>
+    </body>
+</html>
